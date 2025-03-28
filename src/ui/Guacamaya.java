@@ -36,7 +36,7 @@ public class Guacamaya {
 
         System.out.println("Bienvenido a Guacamaya!");
 
-        establecerCantidadVendida();
+        int referencias = establecerCantidadVendida();
 
         boolean salir = false;
 
@@ -54,21 +54,21 @@ public class Guacamaya {
 
             switch (opcion) {
                 case 1:
-                    solicitarDatos();
+                    solicitarDatos(referencias, precios, unidades);
                     break;
                 case 2:
-                    System.out.println("\nLa cantidad total de unidades vendidas en el dia fue de: "+calcularTotalUnidadesVendidas());
+                    System.out.println("\nLa cantidad total de unidades vendidas en el dia fue de: "+calcularTotalUnidadesVendidas(unidades));
                     break;
                 case 3:
-                    System.out.println("\nEl precio promedio de las referencias de producto vendidas en el dia fue de: "+calcularPrecioPromedio());
+                    System.out.println("\nEl precio promedio de las referencias de producto vendidas en el dia fue de: "+calcularPrecioPromedio(precios));
                     break;
                 case 4:
-                    System.out.println("\nLas ventas totales (dinero recaudado) durante el dia fueron: "+calcularVentasTotales());
+                    System.out.println("\nLas ventas totales (dinero recaudado) durante el dia fueron: "+calcularVentasTotales(precios, unidades));
                     break;
                 case 5:
                     System.out.println("\nDigite el limite minimo de ventas a analizar");
                     double limite = reader.nextDouble();
-                    System.out.println("\nDe las "+precios.length+" referencias vendidas en el dia, "+consultarReferenciasSobreLimite(limite)+" superaron el limite minimo de ventas de "+limite);
+                    System.out.println("\nDe las "+precios.length+" referencias vendidas en el dia, "+consultarReferenciasSobreLimite(limite, precios, unidades)+" superaron el limite minimo de ventas de "+limite);
                     break;
                 case 6:
                     System.out.println("\nGracias por usar nuestros servicios!");
@@ -92,7 +92,7 @@ public class Guacamaya {
      * pre: Los arreglos precios y unidades deben estar declarados
      * pos: Los arreglos precios y unidades quedan inicializados
      */
-    public static void establecerCantidadVendida() {
+    public static int establecerCantidadVendida() {
 
         System.out.println("\nDigite el numero de referencias de producto diferentes vendidas en el dia ");
         int referencias = reader.nextInt();
@@ -100,38 +100,90 @@ public class Guacamaya {
         precios = new double[referencias];
         unidades = new int[referencias];
 
+        return referencias;
     }
 
-    public static void solicitarDatos(){
+    /**
+     * Descripcion: Este metodo se encarga de preguntar al usuario el precio de cada producto y la cantidad que compraro del mismo 
+     * pre: Los arreglos precios y unidades debe estar inicializados y declarados
+     * pos: Los arreglos precios y unidades quedan actualizados
+     */
+    public static void solicitarDatos(int referencias, double[] precios, int[] unidades){
+        int cantidad, numProducto = 0;
+        double precio;
 
+        for (int i = 0; i < referencias; i++) {
+            numProducto ++;
+
+            System.out.println("\nIngrese el precio del producto "+numProducto+":");
+            precio = reader.nextInt();
+            reader.nextLine();
+            precios[i] = precio;
+
+            System.out.println("\nAhora ingrese la cantidad del producto "+numProducto+":");
+            cantidad = reader.nextInt();
+            reader.nextLine();
+            unidades[i] = cantidad;
+        }
+    }
+
+    /**
+     * Descripcion: Este metodo se encarga de sumar la cantidad de unidades ventidas para calcular un total
+     * pre: El arreglo de unidades debe estar inicializado y declarado
+     * pos: EL arreglo de unidades queda actualizado
+     */
+    public static int calcularTotalUnidadesVendidas(int[] unidades){
+        int cantidadTotal = 0;
         
-     
-    }
-
-    public static int calcularTotalUnidadesVendidas(){
-
-        return 0;
-
+        for (int i = 0; i < unidades.length; i++) {
+            cantidadTotal += unidades[i];
+        }
+        return cantidadTotal;
 
     }
 
-    public static double calcularPrecioPromedio(){
+    /**
+     * Descripcion: Este metodo se encarga de sumar los precios de las unidades para calcular un promedio
+     * pre: El arreglo de precios debe estar inicializado y declarado
+     * pos: Retorna un double con el valor promedio de los precios
+     */
+    public static double calcularPrecioPromedio(double[] precios){
+        double precioPromedio, sumaPrecios = 0;
+        
+        for (int i = 0; i < unidades.length; i++) {
+            sumaPrecios += precios[i];
+        }
 
-        return 0;
-
+        precioPromedio = sumaPrecios/unidades.length;
+        return precioPromedio;
 
     }
 
-    public static double calcularVentasTotales(){
+    public static double calcularVentasTotales(double[] precios, int[] unidades){
+        double precioRef = 0;
 
-        return 0;
+        for (int i = 0; i < unidades.length; i++) {
+            precioRef += precios[i]*unidades[i];
+        }
 
+        return precioRef;
 
     }
 
-    public static int consultarReferenciasSobreLimite(double limite){
+    public static int consultarReferenciasSobreLimite(double limite, double[] precios, int[] unidades){
+        int contador = 0;
+        double precioRef = 0;
 
-        return 0;
+        for (int i = 0; i < precios.length; i++) {
+
+            precioRef += precios[i]*unidades[i];
+            if (precioRef >= limite) {
+                contador ++;
+            }
+
+        }
+
+        return contador;
 
     }
 
