@@ -150,11 +150,11 @@ public class Guacamaya {
     public static double calcularPrecioPromedio(double[] precios){
         double precioPromedio, sumaPrecios = 0;
         
-        for (int i = 0; i < unidades.length; i++) {
+        for (int i = 0; i < precios.length; i++) {
             sumaPrecios += precios[i];
         }
 
-        precioPromedio = sumaPrecios/unidades.length;
+        precioPromedio = sumaPrecios/precios.length;
         return precioPromedio;
 
     }
