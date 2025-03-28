@@ -159,6 +159,11 @@ public class Guacamaya {
 
     }
 
+    /**
+     * Descripcion: Este metodo se encarga de calcular las ventas totales multiplicando las cantidades de los productos por sus respectivos precios 
+     * pre: Los arreglos precios y unidades debe estar inicializados y declarados
+     * pos: Retorna la suma de las ventas de cada producto
+     */
     public static double calcularVentasTotales(double[] precios, int[] unidades){
         double precioRef = 0;
 
@@ -170,6 +175,13 @@ public class Guacamaya {
 
     }
 
+    /**
+     * Descripcion: Este metodo se encarga de evaluar cuantos productos se han superado el minimo de ventas propuesto 
+     * por el usuario
+     * pre: Los arreglos precios y unidades debe estar inicializados y declarados. Ademas, antes se debe haber inicializado
+     * y delarado el int que impone el limite
+     * pos: Retorna el contador de la cantidad de productos que superaron el minimo
+     */
     public static int consultarReferenciasSobreLimite(double limite, double[] precios, int[] unidades){
         int contador = 0;
         double precioRef = 0;
