@@ -91,6 +91,7 @@ public class Guacamaya {
      * pre: El Scanner reader debe estar inicializado
      * pre: Los arreglos precios y unidades deben estar declarados
      * pos: Los arreglos precios y unidades quedan inicializados
+     * @return: Retorna la cantidad de referencis vendidas en el dia
      */
     public static int establecerCantidadVendida() {
 
@@ -131,6 +132,7 @@ public class Guacamaya {
      * Descripcion: Este metodo se encarga de sumar la cantidad de unidades ventidas para calcular un total
      * pre: El arreglo de unidades debe estar inicializado y declarado
      * pos: EL arreglo de unidades queda actualizado
+     * @return: Retorna la cantidada total de unidades vendidas
      */
     public static int calcularTotalUnidadesVendidas(int[] unidades){
         int cantidadTotal = 0;
@@ -146,6 +148,7 @@ public class Guacamaya {
      * Descripcion: Este metodo se encarga de sumar los precios de las unidades para calcular un promedio
      * pre: El arreglo de precios debe estar inicializado y declarado
      * pos: Retorna un double con el valor promedio de los precios
+     * @return: Retorna el promedio
      */
     public static double calcularPrecioPromedio(double[] precios){
         double precioPromedio, sumaPrecios = 0;
@@ -163,6 +166,7 @@ public class Guacamaya {
      * Descripcion: Este metodo se encarga de calcular las ventas totales multiplicando las cantidades de los productos por sus respectivos precios 
      * pre: Los arreglos precios y unidades debe estar inicializados y declarados
      * pos: Retorna la suma de las ventas de cada producto
+     * @return: Retorna las ventas totales
      */
     public static double calcularVentasTotales(double[] precios, int[] unidades){
         double precioRef = 0;
@@ -181,6 +185,7 @@ public class Guacamaya {
      * pre: Los arreglos precios y unidades debe estar inicializados y declarados. Ademas, antes se debe haber inicializado
      * y delarado el int que impone el limite
      * pos: Retorna el contador de la cantidad de productos que superaron el minimo
+     * @return: Retorna la cantidad de referencias que pasan el limite
      */
     public static int consultarReferenciasSobreLimite(double limite, double[] precios, int[] unidades){
         int contador = 0;
